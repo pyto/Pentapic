@@ -1,0 +1,10 @@
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\bin\Release\Pentapic.exe.config
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\bin\Release\Pentapic.exe
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\bin\Release\Pentapic.pdb
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\Pentapic.Properties.Resources.resources
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\GenerateResource-ResGen.write.1.tlog
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\Pentapic.exe
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\Pentapic.pdb
+C:\Dokumente und Einstellungen\Peter\Eigene Dateien\Visual Studio 2010\Projects\Pentapic\Pentapic\obj\x86\Release\Pentapic.Form1.resources

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 
 namespace Pentapic
@@ -18,6 +19,7 @@ namespace Pentapic
         //i equals to x and k equals to y
         Socket TCP = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         string frame = "";
+        int dia = 1;
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace Pentapic
             try
             {
                 Connect("172.22.99.6", 1338);
-                Send("0200000000ff");
+                Send("0200000000ff",false);
             }
             catch
             {
@@ -42,7 +44,7 @@ namespace Pentapic
                 MessageBox.Show("Verbindung erfolgreich wenn Pentawall Blau.", "Verbindung aufgebaut");
             }
         }
-        private void Send(string HexData)
+        private void Send(string HexData, bool Message)
         {
             HexData = HexData + "\r\n";
             Byte[] Data = Encoding.ASCII.GetBytes(HexData);
@@ -56,7 +58,10 @@ namespace Pentapic
                 TCP.Receive(Rec);
                 recs = Encoding.ASCII.GetString(Rec);
             }
-            MessageBox.Show("Übertragung Abgeschlossen");
+            if (Message)
+            {
+                MessageBox.Show("Übertragung Abgeschlossen");
+            }
             //TCP.Shutdown(SocketShutdown.Both);
             //TCP.Close();
         }
@@ -70,7 +75,7 @@ namespace Pentapic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Send(HexE.Text);
+            Send(HexE.Text, true);
 
         }
 
@@ -131,14 +136,14 @@ namespace Pentapic
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Send(frame);
+            Send(frame,true);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             button3.Enabled = true;
             button2.Enabled = false;
-            Send("05");
+            Send("05",true);
             timer1.Enabled = true;
         }
 
@@ -146,7 +151,7 @@ namespace Pentapic
         {
             button3.Enabled = false;
             button2.Enabled = true;
-            Send("06");
+            Send("06",false);
             timer1.Enabled = false;
         }
 
@@ -162,8 +167,59 @@ namespace Pentapic
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            Send("01");
+            Send("01", false);
         }
+
+        public void button4_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            openFileDialog2.ShowDialog();
+            int leng = openFileDialog2.FileNames.GetLength(0);
+            string[] File = openFileDialog2.FileNames;
+            //timer3.Enabled = true;
+            for (i = 1; i <= leng; i++)
+            {
+                while (dia < i)
+                {
+                    Thread.Sleep(5000);
+                    dia++;
+                }
+                Bitmap img = new Bitmap(File[i - 1]);
+                Color pix = new Color();
+                string[,] pixrgb = new string[16, 15];
+                string[,] pixrgbhex = new String[16, 15];
+                for (int k = 0; k <= 15; k++)
+                {
+                    for (int j = 0; j <= 14; j++)
+                    {
+                        try
+                        {
+                            pix = img.GetPixel(k, j);
+                        }
+                        catch { }
+                        byte[] pixbit = { pix.R, pix.G, pix.B };
+                        pixrgbhex[k, j] = BitConverter.ToString(pixbit).Replace("-", string.Empty);
+
+                    }
+                }
+                makeframe(pixrgbhex);
+                Send(frame, false);
+            }
+            dia = 1;
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            dia++;
+        }
+
+        private void activateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HexE.Enabled = true;
+            bsend.Enabled = true;
+        }
+        
     }
 
 }
